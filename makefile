@@ -19,6 +19,9 @@ set-delay:
 unset-delay:
 	sudo tc qdisc del dev lo root netem
 
+run-server:
+	docker build . -t net-server && docker run -p 12345:12345 -t net-server
+
 # 依赖关系
 server.o: server.c msg.c
 	$(CC) $(CFLAGS) -c server.c
