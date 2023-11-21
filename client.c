@@ -15,6 +15,7 @@
 void show_manual();
 
 int main(int argc, char *argv[]) {
+    setbuf(stdout, 0);
     if (argc != 4) {
         fprintf(stderr, "Usage: %s <server_ip> <server_port> <server_pwd>\n", argv[0]);
         exit(EXIT_FAILURE);
@@ -59,6 +60,7 @@ int main(int argc, char *argv[]) {
     show_msg(INFO_TYPE, "Server response: %s\n", accept_resp.msg);
     
 
+    printf("Input (\\ for command): ");
     while (1) {
         FD_ZERO(&read_fds);
         FD_SET(STDIN_FILENO, &read_fds);
@@ -124,6 +126,7 @@ int main(int argc, char *argv[]) {
             show_msg(INFO_TYPE, "[ %dms ] Received from server: %s\n"
                     , systime_delta(recv_buffer.timestamp), recv_buffer.msg);
                 
+            printf("Input (\\ for command): ");
             // show_msg(DEBUG_TYPE, "raw info\n");
             // print_proto_info(recv_buffer);
         }
