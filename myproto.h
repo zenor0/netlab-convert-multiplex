@@ -10,10 +10,11 @@ enum TYPE {
 
 typedef struct myproto_hdr
 {
-    uint8_t     type;           // 1: request, 2: response
-    long long   timestamp;      // milliseconds
-    char        flag[256];      // system flag
-    char        msg[256];       // message
+    uint8_t     type;      // 1: request,
+                           // 2: response
+    long long   timestamp; // milliseconds
+    char        flag[256]; // system flag
+    char        msg[256];  // message
 } proto_hdr;
 
 int myproto_decode(const void *buf, size_t len, struct myproto_hdr *hdr);

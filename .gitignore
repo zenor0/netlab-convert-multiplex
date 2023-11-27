@@ -54,3 +54,5 @@ dkms.conf
 
 client
 server
+exp/
+tcp-netstat/
