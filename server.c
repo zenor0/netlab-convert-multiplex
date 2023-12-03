@@ -15,8 +15,6 @@
 #define BUFFER_SIZE 1024
 #define EMPTY_SOCKET_SIGN -1
 
-#define SERVER_PWD "zenor0"
-
 
 int disconnect_all_clients(int client_sockets[]);
 void show_client_list(int client_sockets[]);
@@ -157,17 +155,9 @@ int main(int argc, char *argv[]) {
             show_msg(DEBUG_TYPE, "Client %s:%d use %s try to login in.\n", 
                     inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), client_request.msg);
 
-            if (strcmp(client_request.msg, SERVER_PWD) != 0) {
-                show_msg(ERROR_TYPE, "Client %s:%d failed to link.\n",
-                        inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
-                send(new_socket, create_response("Server refused!"), sizeof(proto_hdr), 0);
-                close(new_socket);
-                continue;
-            } else {
-                show_msg(INFO_TYPE, "Client %s:%d linked.\n",
-                        inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
-                send(new_socket, create_response("Server accepted!"), sizeof(proto_hdr), 0);
-            }
+            show_msg(INFO_TYPE, "Client %s:%d linked.\n",
+                    inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+            send(new_socket, create_response("Server accepted!"), sizeof(proto_hdr), 0);
 
 
             // Add new socket to the array of sockets
